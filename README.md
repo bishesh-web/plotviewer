@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+# 🌡️ Thermal Analysis App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React-based thermal analysis application for visualizing and analyzing thermal data with interactive parameter controls and real-time plotting capabilities.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- **Interactive Parameter Sliders**: Discrete value sliders that snap to exact CSV data points
+- **Real-time Thermal Plots**: Dynamic plotting with Plotly.js integration
+- **CSV Data Support**: Load and analyze thermal data from CSV files
+- **Responsive Design**: Modern, mobile-friendly interface
+- **Data Export**: Download plots and data in various formats
+- **Configurable UI**: JSON-based configuration system
 
-### `npm start`
+## 🚀 Quick Start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (v16 or higher)
+- npm or yarn package manager
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository:**
+```bash
+git clone <repository-url>
+cd thermal-analysis-app
+```
 
-### `npm run build`
+2. **Install dependencies:**
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Start the development server:**
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Open your browser:**
+Navigate to `http://localhost:3000` to view the application.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📁 Project Structure
 
-### `npm run eject`
+```
+thermal-analysis-app/
+├── public/
+│   ├── data/                    # CSV data files
+│   │   └── precomputed_Ts_grid.csv
+│   └── config/                  # Configuration files
+│       └── app_config.yaml
+├── src/
+│   ├── components/              # React components
+│   │   ├── Dashboard/           # Main dashboard component
+│   │   ├── ParameterSliders/    # Parameter control sliders
+│   │   ├── PlotArea/           # Plotting components
+│   │   ├── PlotTabs/           # Plot tab navigation
+│   │   ├── DownloadPanel/      # Data export functionality
+│   │   └── LoadingSpinner/     # Loading indicator
+│   ├── services/               # Business logic services
+│   │   ├── ConfigService.js    # Configuration management
+│   │   ├── DataService.js      # Data processing
+│   │   ├── PlotService.js      # Plot generation
+│   │   └── index.js           # Service exports
+│   ├── App.jsx                # Main application component
+│   ├── App.css               # Global styles
+│   └── index.js              # Application entry point
+├── docs/                     # Documentation
+├── README.md                # This file
+└── package.json            # Dependencies and scripts
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🎛️ Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Loading Data
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Place your CSV files in the `public/data/` directory
+2. Update the configuration in `public/config/app_config.yaml`
+3. The app will automatically load and process the data
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Parameter Controls
 
-## Learn More
+- Use the **discrete sliders** to select parameter values
+- Sliders snap to exact values from your CSV data
+- Current values are displayed with 3 decimal precision
+- First and last values are shown as tick marks
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Plotting
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Interactive plots update in real-time as parameters change
+- Hover over data points for detailed information
+- Use plot controls for zooming and panning
+- Download plots as PNG images
 
-### Code Splitting
+### Data Export
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Export current data selection as CSV
+- Download plots in various image formats
+- Parameter summary included in exports
 
-### Analyzing the Bundle Size
+## ⚙️ Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The application uses a YAML configuration file located at `public/config/app_config.yaml`. YAML format allows for comments and better readability. See [Configuration Documentation](./docs/CONFIGURATION.md) for detailed setup instructions.
 
-### Making a Progressive Web App
+## 🔧 Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Available Scripts
 
-### Advanced Configuration
+- `npm start` - Start development server (opens http://localhost:3000)
+- `npm build` - Build for production
+- `npm test` - Run test suite
+- `npm run eject` - Eject from Create React App (irreversible)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Key Technologies
 
-### Deployment
+- **React 19** - User interface framework
+- **Plotly.js** - Interactive plotting library
+- **Papa Parse** - CSV parsing
+- **Lodash** - Utility functions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📊 Data Format
 
-### `npm run build` fails to minify
+CSV files should follow this structure:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```csv
+h_Wm2K,k_WmK,Area_m2,L_m,q_W,Rcond_KW,Rconv_KW,Rtotal_KW,Tinf_C,Ts_C
+30.0,5.0,0.1,0.001,10.0,0.002,0.333,0.335,50.0,79.821
+30.0,5.0,0.1,0.001,20.0,0.002,0.333,0.335,50.0,109.642
+...
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+
+1. Check the [documentation](./docs/)
+2. Open an issue on GitHub
+3. Review existing issues and discussions
+
+## 🔄 Changelog
+
+### v0.1.0 (Current)
+- Initial release
+- Basic thermal analysis functionality
+- Parameter slider controls
+- CSV data loading
+- Interactive plotting
+- Data export capabilities
+
+---
+
+**Built with ❤️ using React and modern web technologies**

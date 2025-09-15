@@ -1,0 +1,40 @@
+.plot-tabs {
+  margin-bottom: 1rem;
+}
+
+.tabs-container {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.tab-button {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: #495057;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.tab-button:hover {
+  background: #e9ecef;
+  transform: translateY(-1px);
+}
+
+.tab-button.active {
+  background: #2E86AB;
+  color: white;
+  border-color: #2E86AB;
+  box-shadow: 0 2px 4px rgba(46, 134, 171, 0.3);
+}
+
+.tab-button.active:hover {
+  background: #1d5f7a;
+}

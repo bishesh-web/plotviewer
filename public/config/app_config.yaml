@@ -1,0 +1,169 @@
+# Thermal Analysis App Configuration
+# This file defines the data sources, parameters, plots, and UI settings for the application
+# YAML format allows for comments and better readability compared to JSON
+
+# =============================================================================
+# APP CONFIGURATION
+# =============================================================================
+app:
+  name: "Thermal Analysis Dashboard"
+  version: "1.0.0"
+  description: "Interactive thermal analysis visualization tool"
+
+# =============================================================================
+# DATA CONFIGURATION
+# =============================================================================
+data:
+  # CSV data source file located in public/data/ directory
+  source: "precomputed_Ts_grid.csv"
+
+  # Input parameters that users can control via sliders
+  # These must match column names in your CSV file exactly
+  parameters:
+    h_Wm2K:
+      label: "Heat Transfer Coefficient"
+      unit: "W/m²K"
+      precision: 3  # Number of decimal places for display (deprecated, now uses 3)
+      description: "Convective heat transfer coefficient between the surface and surrounding fluid"
+
+    k_WmK:
+      label: "Thermal Conductivity"
+      unit: "W/mK"
+      precision: 3
+      description: "Material thermal conductivity - higher values mean better heat conduction"
+
+    Area_m2:
+      label: "Surface Area"
+      unit: "m²"
+      precision: 3
+      description: "Heat transfer surface area - larger area increases heat transfer"
+
+    L_m:
+      label: "Thickness"
+      unit: "m"
+      precision: 3
+      description: "Material thickness - affects thermal resistance through conduction"
+
+    q_W:
+      label: "Heat Input"
+      unit: "W"
+      precision: 3
+      description: "Heat input power - the energy being transferred through the system"
+
+    Tinf_C:
+      label: "Ambient Temperature"
+      unit: "°C"
+      precision: 3
+      description: "Surrounding fluid temperature - the environment temperature"
+
+  # Output parameters calculated from input parameters
+  # These are typically the results of thermal analysis calculations
+  output_parameters:
+    Ts_C:
+      label: "Surface Temperature"
+      unit: "°C"
+      precision: 3
+      description: "Calculated surface temperature based on thermal analysis"
+
+    Rcond_KW:
+      label: "Conductive Resistance"
+      unit: "K/W"
+      precision: 3
+      description: "Thermal resistance due to conduction through the material"
+
+    Rconv_KW:
+      label: "Convective Resistance"
+      unit: "K/W"
+      precision: 3
+      description: "Thermal resistance due to convection at the surface"
+
+    Rtotal_KW:
+      label: "Total Resistance"
+      unit: "K/W"
+      precision: 3
+      description: "Total thermal resistance (sum of conductive and convective)"
+
+# =============================================================================
+# PLOT CONFIGURATION
+# =============================================================================
+plots:
+  # Primary temperature analysis plot
+  temperature_plot:
+    title: "🌡️ YAML LOADED - Surface Temperature vs Heat Input"
+    x_column: "q_W"        # Column name for X-axis data
+    y_column: "Ts_C"       # Column name for Y-axis data
+    x_label: "Heat Input (W)"
+    y_label: "Surface Temperature (°C)"
+
+    # Visual styling for this plot
+    style:
+      line_color: "#2E86AB"    # Blue line color (hex format)
+      line_width: 3            # Line thickness in pixels
+      marker_color: "#A23B72"  # Purple marker color
+      marker_size: 6           # Marker size in pixels
+
+  # Secondary resistance analysis plot
+  resistance_plot:
+    title: "Convective vs Total Thermal Resistance"
+    x_column: "Rconv_KW"
+    y_column: "Rtotal_KW"
+    x_label: "Convective Thermal Resistance (K/W)"
+    y_label: "Total Thermal Resistance (K/W)"
+
+    # Different color scheme for this plot
+    style:
+      line_color: "#F18F01"    # Orange line color
+      line_width: 3
+      marker_color: "#C73E1D"  # Red marker color
+      marker_size: 6
+
+# =============================================================================
+# USER INTERFACE CONFIGURATION
+# =============================================================================
+ui:
+  components:
+    plots:
+      # Which plot to show when the app first loads
+      default_plot: "temperature_plot"
+
+      # List of available plots that users can switch between
+      # Must match the keys in the plots section above
+      available_plots:
+        - "temperature_plot"
+        - "resistance_plot"
+
+    parameters:
+      # Default parameter values when the app loads
+      # These values must exist in your CSV data
+      default_selection:
+        h_Wm2K: 30.0
+        k_WmK: 5.0
+        Area_m2: 0.1
+        L_m: 0.001
+        Tinf_C: 50.0
+
+  # Visual styling and theming
+  styling:
+    theme: "modern"              # Theme name (currently only "modern" supported)
+    primary_color: "#2E86AB"     # Main app color (blue)
+    secondary_color: "#A23B72"   # Accent color (purple)
+    accent_color: "#F18F01"      # Highlight color (orange)
+
+# =============================================================================
+# ADVANCED CONFIGURATION (Optional)
+# =============================================================================
+
+# You can add additional sections here for future features:
+#
+# export:
+#   formats: ["csv", "json", "xlsx"]
+#   filename_template: "thermal_data_{timestamp}"
+#
+# performance:
+#   max_data_points: 10000
+#   enable_caching: true
+#
+# features:
+#   enable_animations: true
+#   show_tooltips: true
+#   allow_zoom: true

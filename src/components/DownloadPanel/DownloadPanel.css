@@ -1,0 +1,60 @@
+.download-info {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.download-info h4 {
+  color: #495057;
+  font-size: 1rem;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selection-summary {
+  font-size: 0.9rem;
+}
+
+.selection-summary p {
+  margin: 0.5rem 0;
+  color: #495057;
+}
+
+.selection-summary ul {
+  margin: 0.5rem 0 0 1rem;
+  padding: 0;
+}
+
+.selection-summary li {
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.download-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #e3f2fd;
+  border-radius: 6px;
+  margin: 1rem 0;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.progress-spinner {
+  border: 2px solid #e3f2fd;
+  border-top: 2px solid #1976d2;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
