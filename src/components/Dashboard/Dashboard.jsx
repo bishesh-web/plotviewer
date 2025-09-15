@@ -37,14 +37,19 @@ const Dashboard = ({ config, dataService }) => {
 
     setActiveTab(activeTabKey);
 
-    // Then initialize parameters and plot
-    const availableValues = dataService.getParameterValues();
-    console.log('📊 Available parameter values:', availableValues);
+    // Then initialize parameters and plot for the active tab
+    const availableValues = dataService.getParameterValues(activeTabKey);
+    console.log('📊 Available parameter values for', activeTabKey, ':', availableValues);
     setParameterValues(availableValues);
 
     // Set initial selection to first available value for each parameter
     const initialSelection = {};
-    Object.keys(config.data.parameters).forEach(param => {
+
+    // Use plot-specific parameters if available, otherwise fall back to global parameters
+    const plotConfig = config.plots[activeTabKey];
+    const parametersToUse = plotConfig?.parameters ? Object.keys(plotConfig.parameters) : Object.keys(config.data.parameters);
+
+    parametersToUse.forEach(param => {
       const values = availableValues[param]?.values || [];
       if (values.length > 0) {
         initialSelection[param] = values[0];
@@ -85,8 +90,28 @@ const Dashboard = ({ config, dataService }) => {
   };
 
   const handleTabChange = (tabKey) => {
+    console.log('🔄 Switching to tab:', tabKey);
     setActiveTab(tabKey);
-    updatePlot(selectedParameters, tabKey);
+
+    // Load parameters for the new plot
+    const newParameterValues = dataService.getParameterValues(tabKey);
+    setParameterValues(newParameterValues);
+
+    // Reset parameter selection to defaults for the new plot
+    const plotConfig = config.plots[tabKey];
+    const parametersToUse = plotConfig?.parameters ? Object.keys(plotConfig.parameters) : Object.keys(config.data.parameters);
+
+    const newSelection = {};
+    parametersToUse.forEach(param => {
+      const values = newParameterValues[param]?.values || [];
+      if (values.length > 0) {
+        newSelection[param] = values[0];
+      }
+    });
+
+    console.log('🎯 New selection for', tabKey, ':', newSelection);
+    setSelectedParameters(newSelection);
+    updatePlot(newSelection, tabKey);
   };
 
   return (
@@ -104,6 +129,7 @@ const Dashboard = ({ config, dataService }) => {
             selectedParameters={selectedParameters}
             onParameterChange={handleParameterChange}
             dataPointsCount={plotData.dataPoints}
+            activeTab={activeTab}
           />
 
           <DownloadPanel

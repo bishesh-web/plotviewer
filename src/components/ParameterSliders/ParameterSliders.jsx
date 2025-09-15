@@ -1,16 +1,20 @@
 import React from 'react';
 import './ParameterSliders.css';
 
-const ParameterSliders = ({ config, parameterValues, selectedParameters, onParameterChange, dataPointsCount }) => {
+const ParameterSliders = ({ config, parameterValues, selectedParameters, onParameterChange, dataPointsCount, activeTab }) => {
   const handleParameterChange = (param, value) => {
     onParameterChange(param, parseFloat(value));
   };
 
+  // Determine which parameter configuration to use
+  const plotConfig = activeTab ? config.plots[activeTab] : null;
+  const parametersConfig = plotConfig?.parameters || config.data.parameters;
+
   return (
     <div className="parameter-sliders">
       <h3>🎛️ Parameters</h3>
-      
-      {Object.entries(config.data.parameters).map(([param, paramConfig]) => {
+
+      {Object.entries(parametersConfig).map(([param, paramConfig]) => {
         const values = parameterValues[param]?.values || [];
         const selectedValue = selectedParameters[param];
         

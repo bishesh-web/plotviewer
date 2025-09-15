@@ -89,11 +89,40 @@ data:
 plots:
   # Primary temperature analysis plot
   temperature_plot:
-    title: "🌡️ YAML LOADED - Surface Temperature vs Heat Input"
+    title: "🌡️ Surface Temperature vs Heat Input"
+    data_source: "precomputed_Ts_grid.csv"  # CSV file for this plot
     x_column: "q_W"        # Column name for X-axis data
     y_column: "Ts_C"       # Column name for Y-axis data
     x_label: "Heat Input (W)"
     y_label: "Surface Temperature (°C)"
+
+    # Parameters specific to this plot (from the CSV columns)
+    parameters:
+      h_Wm2K:
+        label: "Heat Transfer Coefficient"
+        unit: "W/m²K"
+        precision: 3
+        description: "Convective heat transfer coefficient"
+      k_WmK:
+        label: "Thermal Conductivity"
+        unit: "W/mK"
+        precision: 3
+        description: "Material thermal conductivity"
+      Area_m2:
+        label: "Surface Area"
+        unit: "m²"
+        precision: 3
+        description: "Heat transfer surface area"
+      L_m:
+        label: "Thickness"
+        unit: "m"
+        precision: 3
+        description: "Material thickness"
+      Tinf_C:
+        label: "Ambient Temperature"
+        unit: "°C"
+        precision: 3
+        description: "Surrounding fluid temperature"
 
     # Visual styling for this plot
     style:
@@ -104,11 +133,40 @@ plots:
 
   # Secondary resistance analysis plot
   resistance_plot:
-    title: "Convective vs Total Thermal Resistance"
+    title: "🔧 Thermal Resistance Analysis"
+    data_source: "resistance_analysis.csv"  # Different CSV file for this plot
     x_column: "Rconv_KW"
     y_column: "Rtotal_KW"
     x_label: "Convective Thermal Resistance (K/W)"
     y_label: "Total Thermal Resistance (K/W)"
+
+    # Different parameters specific to this plot
+    parameters:
+      h_Wm2K:
+        label: "Heat Transfer Coefficient"
+        unit: "W/m²K"
+        precision: 3
+        description: "Convective heat transfer coefficient"
+      k_WmK:
+        label: "Thermal Conductivity"
+        unit: "W/mK"
+        precision: 3
+        description: "Material thermal conductivity"
+      Area_m2:
+        label: "Surface Area"
+        unit: "m²"
+        precision: 3
+        description: "Heat transfer surface area"
+      L_m:
+        label: "Thickness"
+        unit: "m"
+        precision: 3
+        description: "Material thickness"
+      Tinf_C:
+        label: "Ambient Temperature"
+        unit: "°C"
+        precision: 3
+        description: "Surrounding fluid temperature"
 
     # Different color scheme for this plot
     style:
